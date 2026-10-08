@@ -1,2 +1,2 @@
 # oddSite
-Oddsphere website.
+Oddsphere website for audiovisual experiments.
