@@ -303,12 +303,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-lg);
   margin-top: var(--space-lg);
-}
-
-@media (min-width: 24rem) {
-    .gallery-grid {
-        justify-content: center;
-    }
+  justify-content: center;
 }
 
 .gallery-item {
