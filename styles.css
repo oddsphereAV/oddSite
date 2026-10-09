@@ -19,6 +19,7 @@ body {
 
 main {
     margin-top: var(--space-xl);
+    flex-grow: 1;
 }
 
 footer {
