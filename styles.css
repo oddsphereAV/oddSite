@@ -305,6 +305,12 @@ body {
   margin-top: var(--space-lg);
 }
 
+@media (min-width: 24rem) {
+    .gallery-grid {
+        justify-content: center;
+    }
+}
+
 .gallery-item {
   margin: 0;
   display: flex;
