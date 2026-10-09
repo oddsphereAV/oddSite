@@ -15,6 +15,7 @@ img, iframe {
 body {
     margin: 0;
     padding: var(--space-md);
+    background-color: var(--color-bg);
 }
 
 main {
@@ -165,24 +166,26 @@ footer {
     --color-bg: var(--white);
 }
 
-.theme--dark {
-    --color-text: var(--gray-1);
-    --color-text-heading: var(--white);
-    --color-text-subtle: var(--gray-4);
-    --color-link: var(--color-accent);
-    --color-link-visited: var(--color-accent);
-
-    --color-bg: var(--black);
-
-    color: var(--color-text);
+/* automatic dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text: var(--gray-1);
+        --color-text-heading: var(--white);
+        --color-text-subtle: var(--gray-4);
+        --color-link: var(--color-accent);
+        --color-link-visited: var(--color-accent);
+        --color-bg: var(--black);
+    }
+    
+    body {
+        background-color:var(--color-bg);
+        color: var(--color-text);
+    }
+    
 }
 
 body {
     color: var(--color-text);
-}
-
-body, .theme--dark {
-    background-color:var(--color-bg);
 }
 
 h1, h2, h3, h4, form legend {
