@@ -19,7 +19,7 @@ body {
 
 main {
     margin-top: var(--space-xl);
-    flex-grow: 1;
+    flex: 1;
 }
 
 footer {
@@ -132,6 +132,10 @@ h1, h2, h3, h4, form legend {
     ul, ol, p {
         margin-bottom: var(--space-md);
     }
+}
+
+footer {
+    margin-top: var(--space-xxl);
 }
 
 /* --------------------------------
@@ -283,3 +287,9 @@ a {
     padding: 0;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* fallback */
+    min-height: 100dvh; /* dynamic viewport units for mobile support */
+}
