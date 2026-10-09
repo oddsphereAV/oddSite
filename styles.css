@@ -296,3 +296,30 @@ body {
     min-height: 100vh; /* fallback */
     min-height: 100dvh; /* dynamic viewport units for mobile support */
 }
+
+/* gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.gallery-item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.gallery-item figcaption {
+  margin-top: var(--space-xs);
+  font-size: var(--text-sm);
+  color: var(--color-text-subtle);
+}
