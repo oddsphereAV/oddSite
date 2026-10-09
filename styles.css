@@ -1,0 +1,284 @@
+/* --------------------------------
+
+            Base
+
+-------------------------------- */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+img, iframe {
+    max-width: 100%;
+}
+
+body {
+    margin: 0;
+    padding: var(--space-md);
+}
+
+main {
+    margin-top: var(--space-xl);
+}
+
+footer {
+    margin-top: var(--space-xxl);
+}
+
+/* --------------------------------
+
+            Typography
+
+-------------------------------- */
+
+:root {
+        --font-primary: sans-serif;
+        --font-secondary: serif;
+
+        /* set base values */
+        --text-base-size: clamp(1rem, 0.886rem + 0.568vw, 1.25rem);
+        --text-scale-ratio: 1.2;
+
+        /* type scale */
+        --text-xs: calc(1em / pow(var(--text-scale-ratio), 2));
+        --text-sm: calc(1em / var(--text-scale-ratio));
+        --text-md: 1em;
+        --text-lg: calc(1em * pow(var(--text-scale-ratio), 2));
+        --text-xl: calc(1em * pow(var(--text-scale-ratio), 3));
+        --text-xxl: calc(1em * pow(var(--text-scale-ratio), 4));
+        --text-xxxl: calc(1em * pow(var(--text-scale-ratio), 5));
+
+        /* line height*/
+        --heading-line-height: 1.2;
+        --body-line-height: 1.5;
+}
+
+body {
+    font-size: var(--text-base-size);
+    font-family: var(--font-primary);
+}
+
+h1, h2, h3, h4, form legend {
+    line-height: var(--heading-line-height);
+}
+
+/* text size */
+.text--xxxl { 
+    font-size: var(--text-xxxl);
+}
+
+h1, .text--xxl { 
+    font-size: var(--text-xxl);
+}
+
+h2, .text--xl { 
+    font-size: var(--text-xl);
+}
+
+h3, .text--lg { 
+    font-size: var(--text-lg);
+}
+
+h4, .text--md { 
+    font-size: var(--text-md);
+}
+
+.text--sm, small { 
+    font-size: var(--text-sm);
+}
+
+.text-xs { 
+    font-size: var(--text-xs);
+}
+
+p {
+    line-height: var(--body-line-height);
+}
+
+.text--center {
+    text-align: center;
+}
+
+
+/* --------------------------------
+
+            Spacing
+            
+-------------------------------- */
+
+:root {
+    /* spacing values */
+    --space-xxxs: 0.25em;
+    --space-xxs: 0.375em;
+    --space-xs: 0.5em;
+    --space-sm: 0.75em;
+    --space-md: 1.25em;
+    --space-lg: 2em;
+    --space-xl: 3.25em;
+    --space-xxl: 5.25em;
+    --space-xxxl: 8.5em;
+}
+
+h1, h2, h3, h4, form legend {
+    margin-bottom: var(--space-xxs);
+}
+
+.text-container {
+    h2, h3, h4 {
+        margin-top: var(--space-sm);
+    }
+
+    ul, ol, p {
+        margin-bottom: var(--space-md);
+    }
+}
+
+/* --------------------------------
+
+            Color
+            
+-------------------------------- */
+
+:root {
+    /* typography */
+    --black: #111;
+    --white: #fff;
+    --gray-1: #f2f2f2;
+    --gray-4: #a6a6a6;
+    --gray-6: #6b6b6b;
+    --gray-10: #1a1a1a;
+    --color-primary: #1287ea;
+    --color-primary-dark: #0b5fa8;
+    --color-accent: #bd7b07;
+
+    --color-text: var(--gray-10);
+    --color-text-heading: var(--black);
+    --color-text-subtle: var(--gray-6);
+    --color-link: var(--color-primary);
+    --color-link-visited: var(--color-primary-dark);
+
+    --color-bg: var(--white);
+}
+
+.theme--dark {
+    --color-text: var(--gray-1);
+    --color-text-heading: var(--white);
+    --color-text-subtle: var(--gray-4);
+    --color-link: var(--color-accent);
+    --color-link-visited: var(--color-accent);
+
+    --color-bg: var(--black);
+
+    color: var(--color-text);
+}
+
+body {
+    color: var(--color-text);
+}
+
+body, .theme--dark {
+    background-color:var(--color-bg);
+}
+
+h1, h2, h3, h4, form legend {
+    color: var(--color-text-heading);
+}
+
+a {
+    color: var(--color-link);
+
+    &:visited {
+        color: var(--color-link-visited);
+    }
+}
+
+/* --------------------------------
+
+            Layout
+            
+-------------------------------- */
+
+:root {
+    --grid-gap: var(--space-md); /* use existing space variable for gap */
+}
+
+@media (min-width: 64rem) {
+    :root {
+        --grid-gap: var(--space-lg); /* larger gap for desktop */
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr)); /* 12 column grid */
+    gap: var(--grid-gap);
+}
+
+/* column span utilities (mobile first, defaults to full width) */
+.col--12 {grid-column: span 12;}
+.col--6 {grid-column: span 12;}
+.col--4 {grid-column: span 12;}
+.col--3 {grid-column: span 12;}
+
+/* desktop screens 64rem 1024px and up */
+@media (min-width: 64rem) {
+    .col--6\@md {grid-column: span 6;} /* 2 columns per row */
+    .col--4\@md {grid-column: span 4;} /* 3 columns per row */
+    .col--3\@md {grid-column: span 3;} /* 4 columns per row */
+    .col--8\@md {grid-column: span 8;} /* Main content (2/3 width) */
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.site-nav { 
+    max-width: 100%;
+}
+
+.site-header nav {
+    justify-content: safe center;
+}
+
+@media (min-width: 48rem) {
+    .site-header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.site-logo {
+    display: block;
+    width: 20rem;
+}
+
+.nav-list {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    justify-items: center;
+    gap: var(--space-xs) var(--space-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-width: 24rem) {
+    .nav-list {
+        grid-template-columns: repeat(4, auto);
+    }
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
