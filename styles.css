@@ -153,9 +153,9 @@ footer {
     --gray-4: #a6a6a6;
     --gray-6: #6b6b6b;
     --gray-10: #1a1a1a;
-    --color-primary: #1287ea;
+    --color-primary: #008cff;
     --color-primary-dark: #0b5fa8;
-    --color-accent: #bd7b07;
+    --color-accent: #bbff00;
 
     --color-text: var(--gray-10);
     --color-text-heading: var(--black);
