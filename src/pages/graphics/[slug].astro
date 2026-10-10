@@ -1,0 +1,48 @@
+---
+// getCollection loads pieces, render turns md into html
+import { getCollection, render } from 'astro:content';
+
+// Components
+import Head from '../../components/Head.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// Learn which page to make
+export async function getStaticPaths() {
+
+    // Load gallery pieces as list
+    const pieces = await getCollection('graphics');
+    
+    // For each piece, make one page
+    return pieces.map((piece) => ({
+        params: { slug: piece.id }, // fills [slug] in the address; id = file name without .md
+        props: { piece }, // hands piece to page below
+    }));
+}
+
+// The piece for this page
+const { piece } = Astro.props;
+
+// Turn md into html
+const { Content } = await render(piece);
+---
+
+<html lang="en">
+    <Head><title>{piece.data.title} | Oddsphere</title></Head>
+    <body>
+        <Header />
+        
+        <main id="main">
+            <h1>{piece.data.title}</h1>
+
+            <!-- Get date -->
+            <p>{piece.data.date.getFullYear()}</p>
+
+            <!-- .md description -->
+            <Content />
+        </main>
+
+        <Footer />
+    </body>
+</html>
+
