@@ -1,0 +1,44 @@
+---
+import Head from '../components/Head.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Gallery from "../components/Gallery.astro";
+import ArtworkCard from "../components/ArtworkCard.astro";
+import discovery from '../assets/img/discovery.png'
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Head Component -->
+    <Head>
+        <title> Graphics </title>
+    </Head>
+	<!-- -------------- -->
+    
+    <body>
+        <!-- Header Component -->
+		<Header></Header>
+        <!-- ---------------- -->
+
+        <main id="main">
+            <section>
+                <h1> Graphics </h1>
+                
+                <!-- Gallery Component -->
+                <Gallery>
+                    <ArtworkCard src={discovery} alt="Discovery" caption="Discovery" />
+
+                    <ArtworkCard src={discovery} alt="Discovery" caption="Discovery" />
+
+                    <ArtworkCard src={discovery} alt="Discovery" caption="Discovery" />
+                </Gallery> 
+                <!-- ---------------- -->
+            
+            </section>
+        </main>
+
+        <!-- Footer Component -->
+        <Footer></Footer>
+        <!-- ---------------- -->
+    </body>
+</html>
