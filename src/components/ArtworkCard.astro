@@ -1,9 +1,17 @@
 ---
-import { Image } from 'astro:assets';
-const { src, alt, title } = Astro.props;
+// What each card receives from one page
+// width/height = image resolution
+const { src, alt, title, width, height } = Astro.props;
 ---
 <!-- Parameter locations -->
 <figure class="gallery-item">
-    <Image src={src} alt={alt}/>
+    <img 
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        loading="lazy"
+        decoding="async"
+    />
     <figcaption> {title} </figcaption>
 </figure>
