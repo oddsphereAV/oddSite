@@ -1,3 +1,8 @@
+---
+// The address of the page being shown
+const path = Astro.url.pathname;
+---
+
 <header class="site-header">
     <a href="/">
          <img src="/assets/img/logo.svg" alt="Oddsphere home" class="site-logo">
@@ -5,10 +10,10 @@
     
     <nav class="site-nav">
         <ul class="nav-list">
-            <li><a href="/" aria-current="page" > Home </a></li>
-            <li><a href="/audio/"> Audio </a></li>
-            <li><a href="/graphics/"> Graphics </a></li>
-            <li><a href="/about/"> About </a></li>
+            <li><a href="/" aria-current={path === '/' ? 'page' : undefined} > Home </a></li>
+            <li><a href="/audio/" aria-current={path.startsWith('/audio') ? 'page' : undefined}> Audio </a></li>
+            <li><a href="/graphics/" aria-current={path.startsWith('/graphics') ? 'page' : undefined}> Graphics </a></li>
+            <li><a href="/about/" aria-current={path.startsWith('/about') ? 'page' : undefined}> About </a></li>
         </ul>
     </nav>
 </header>
