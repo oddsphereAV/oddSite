@@ -1,43 +1,76 @@
-# Astro Starter Kit: Minimal
-
+# Oddsphere
+ 
+Website for **Oddsphere**, the audiovisual project of Mitchell Troyer: electronic music, realtime visuals, and GLSL art.
+ 
+Live at [oddsphere.net](https://oddsphere.net).
+ 
+## Built with
+ 
+- [Astro](https://astro.build): static site generator (components, layouts, image optimization)
+- Plain CSS: a single stylesheet with a type scale, spacing scale, and automatic dark mode
+- Bandcamp and Instagram embeds for music and social
+## Running locally
+ 
+Requires [Node.js](https://nodejs.org) (LTS).
+ 
 ```sh
-npm create astro@latest -- --template minimal
+npm install      # install dependencies (first time only)
+npm run dev      # start the dev server at http://localhost:4321
+npm run build    # build the production site into ./dist
+npm run preview  # preview the production build locally
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
+ 
+## Project structure
+ 
 ```text
 /
-├── public/
+├── public/                 # Served as-is, never processed
+│   ├── assets/img/         # Logo and other static images
+│   └── styles.css          # Site stylesheet
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── assets/img/         # Gallery images (imported, so they get compressed)
+│   ├── components/
+│   │   ├── Head.astro          # <head> contents; each page passes its <title> in
+│   │   ├── Header.astro        # Logo and site navigation
+│   │   ├── Footer.astro        # Social links and copyright
+│   │   ├── Gallery.astro       # Grid wrapper; holds anything placed inside it
+│   │   ├── ArtworkCard.astro   # One artwork: image (optimized) and caption
+│   │   └── BandcampPlayer.astro # Bandcamp embed (in progress)
+│   └── pages/              # Each file becomes a page
+│       ├── index.astro     # /
+│       ├── audio.astro     # /audio/
+│       ├── graphics.astro  # /graphics/
+│       └── about.astro     # /about/
+├── astro.config.mjs
 └── package.json
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+ 
+### `public/` vs `src/assets/`
+ 
+- **`public/`**: files are copied untouched and referenced by URL (e.g. `/assets/img/logo.svg`).
+- **`src/assets/`**: images are **imported** and rendered with Astro's `<Image />`, which compresses them, converts them to WebP, and adds width, height and lazy loading.
+## Adding an artwork (current workflow)
+ 
+1. Put the image in `src/assets/img/` (lowercase file name, e.g. `my-piece.png`).
+2. Import it at the top of `src/pages/graphics.astro`:
+```js
+   import myPiece from '../assets/img/my-piece.png';
+```
+3. Add a card inside `<Gallery>`:
+```astro
+   <ArtworkCard src={myPiece} alt="Describe what's in the image" caption="Title" />
+```
+ 
+This will be replaced by a content collection, so new pieces won't need code changes.
+ 
+## Roadmap
+ 
+- [x] Move hand-written HTML/CSS into Astro
+- [x] Header, Footer, and Head components
+- [x] Gallery grid and ArtworkCard with image optimization
+- [ ] Content collection for artworks (one file per piece)
+- [ ] Individual page for each artwork
+- [ ] Shared layout for all pages
+- [ ] Pages CMS for posting from the browser
+- [ ] Gallery images hosted on Cloudflare R2
+- [ ] Deploy to Cloudflare Pages
