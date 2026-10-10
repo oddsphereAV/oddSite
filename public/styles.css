@@ -329,12 +329,3 @@ body {
             Embed
             
 -------------------------------- */
-.instagram-wrap {
-    display: flex;
-    justify-content: center;
-    margin-block: var(--space-lg);
-}
-
-.instagram-wrap .instagram-media {
-    min-width: 0 !important;
-}
