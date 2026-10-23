@@ -61,7 +61,7 @@ const tracks = defineCollection({
         release: reference('releases'),
         trackNumber: z.number().int().positive().default(1),
         genre: z.string(),
-        bpm: z.number().positive(),
+        bpm: z.number().int().positive(), // whole number, e.g. 174
         key: z.string().optional(), // e.g. "F# minor"
         duration,
         audio: z.string().url(), // file on R2
