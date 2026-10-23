@@ -1,4 +1,8 @@
-<div class="gallery-grid">
+---
+// columnWidth (optional) = fixed column width, e.g. "350px" for embeds that need an exact size
+const { columnWidth } = Astro.props;
+---
+<div class:list={["gallery-grid", columnWidth && "gallery-grid--fixed"]} style={columnWidth ? `--column-width: ${columnWidth}` : undefined}>
     <slot></slot>
 </div>
 
@@ -8,6 +12,12 @@
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: var(--space-lg);
         margin-top: var(--space-lg);
+    }
+
+    /* fixed-width columns, left aligned, so gaps stay even */
+    .gallery-grid--fixed {
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--column-width)), var(--column-width)));
+        justify-content: start;
     }
 
     /* items are also used directly in slotted page content (audio.astro) */

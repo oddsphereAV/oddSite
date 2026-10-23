@@ -12,10 +12,16 @@ img, iframe {
     max-width: 100%;
 }
 
+img {
+    display: block;
+    height: auto;
+}
+
 body {
     margin: 0;
     padding: var(--space-md);
     background-color: var(--color-bg);
+    color: var(--color-text);
 }
 
 main {
@@ -89,7 +95,7 @@ h4, .text--md {
     font-size: var(--text-sm);
 }
 
-.text-xs { 
+.text--xs { 
     font-size: var(--text-xs);
 }
 
@@ -135,10 +141,6 @@ h1, h2, h3, h4, form legend {
     }
 }
 
-footer {
-    margin-top: var(--space-xxl);
-}
-
 /* --------------------------------
 
             Color
@@ -155,15 +157,18 @@ footer {
     --gray-10: #1a1a1a;
     --color-primary: #008cff;
     --color-primary-dark: #0b5fa8;
+    --color-primary-text: #0068c9; /* primary darkened for 5:1+ contrast on white */
     --color-accent: #bbff00;
 
     --color-text: var(--gray-10);
     --color-text-heading: var(--black);
     --color-text-subtle: var(--gray-6);
-    --color-link: var(--color-primary);
+    --color-link: var(--color-primary-text);
     --color-link-visited: var(--color-primary-dark);
 
     --color-bg: var(--white);
+
+    color-scheme: light dark;
 }
 
 /* automatic dark mode */
@@ -176,16 +181,6 @@ footer {
         --color-link-visited: var(--color-accent);
         --color-bg: var(--black);
     }
-    
-    body {
-        background-color:var(--color-bg);
-        color: var(--color-text);
-    }
-    
-}
-
-body {
-    color: var(--color-text);
 }
 
 h1, h2, h3, h4, form legend {
@@ -208,6 +203,12 @@ a {
 a:hover {
     color: var(--color-text-heading);
     text-decoration-thickness: 0.15em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    a {
+        transition: none;
+    }
 }
 
 a:focus-visible {
