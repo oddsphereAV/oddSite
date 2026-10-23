@@ -1,3 +1,19 @@
 <div class="gallery-grid">
     <slot></slot>
 </div>
+
+<style>
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--space-lg);
+        margin-top: var(--space-lg);
+    }
+
+    /* items are also used directly in slotted page content (audio.astro) */
+    .gallery-grid :global(.gallery-item) {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+</style>
