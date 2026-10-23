@@ -57,6 +57,8 @@ import ArtworkCard from '../components/ArtworkCard.astro';
     /* Grid adds its own top margin; match the heading-to-content gap of the player */
     section :global(.gallery-grid) {
         margin-top: 0;
+        /* one full-width image to match the player; auto-fill left empty tracks on wide screens */
+        grid-template-columns: minmax(0, 1fr);
     }
 
     /* iframes are inline by default and leave a gap below */
