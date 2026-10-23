@@ -4,11 +4,16 @@ const path = Astro.url.pathname;
 ---
 
 <header class="site-header">
-    <a href="/">
+    <a href="/" class="site-logo-link">
          <img src="/assets/img/logo.svg" alt="Oddsphere home" class="site-logo">
     </a>
-    
-    <nav class="site-nav">
+
+    <!-- Only shown on phones, and only when JavaScript is on (otherwise the nav is simply open) -->
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-label">Menu</span>
+    </button>
+
+    <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul class="nav-list">
             <li><a href="/" aria-current={path === '/' ? 'page' : undefined} > Home </a></li>
             <li><a href="/audio/" aria-current={path.startsWith('/audio') ? 'page' : undefined}> Audio </a></li>
@@ -18,29 +23,70 @@ const path = Astro.url.pathname;
     </nav>
 </header>
 
+<script>
+    const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+    const nav = document.querySelector<HTMLElement>('.site-nav');
+
+    function setOpen(open: boolean) {
+        toggle?.setAttribute('aria-expanded', String(open));
+        toggle?.querySelector('.nav-toggle-label')!.replaceChildren(open ? 'Close' : 'Menu');
+        nav?.classList.toggle('is-open', open);
+    }
+
+    toggle?.addEventListener('click', () => {
+        setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    // Escape closes the menu and returns focus to the button
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+            setOpen(false);
+            toggle.focus();
+        }
+    });
+</script>
 
 <style>
     .site-header {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        flex-direction: column;
-        gap: var(--space-md);
+        justify-content: space-between;
+        gap: var(--space-sm) var(--space-md);
     }
 
-    .site-nav {
-        max-width: 100%;
-    }
-
-    @media (min-width: 48rem) {
-        .site-header {
-            flex-direction: row;
-            justify-content: space-between;
-        }
+    .site-logo-link {
+        display: block;
+        min-width: 0;
     }
 
     .site-logo {
         display: block;
-        width: 20rem;
+        width: 14rem;
+    }
+
+    .nav-toggle {
+        display: none; /* shown below on phones when JavaScript is on */
+        font: inherit;
+        font-size: var(--text-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-text-heading);
+        background: transparent;
+        border: 1px solid currentColor;
+        border-radius: 4px;
+        padding: var(--space-xs) var(--space-md);
+        min-height: 2.75rem;
+        cursor: pointer;
+    }
+
+    .nav-toggle:focus-visible {
+        outline: 2px solid var(--color-link);
+        outline-offset: 3px;
+    }
+
+    .site-nav {
+        flex-basis: 100%;
     }
 
     .site-nav a,
@@ -60,19 +106,54 @@ const path = Astro.url.pathname;
     }
 
     .nav-list {
-        display: grid;
-        grid-template-columns: repeat(2, auto);
-        justify-content: center;
-        justify-items: center;
-        gap: var(--space-xs) var(--space-md);
+        display: flex;
+        flex-direction: column;
         list-style: none;
         margin: 0;
         padding: 0;
     }
 
-    @media (min-width: 24rem) {
+    /* big tap targets with a rule between items */
+    .nav-list a {
+        display: flex;
+        align-items: center;
+        min-height: 2.75rem;
+        border-top: 1px solid var(--color-text-subtle);
+    }
+
+    /* phones with JavaScript: menu button, nav hidden until opened */
+    @media (max-width: 47.99rem) {
+        :global(.js) .nav-toggle {
+            display: block;
+        }
+
+        :global(.js) .site-nav:not(.is-open) {
+            display: none;
+        }
+    }
+
+    /* tablets and up: logo left, links in a row on the right */
+    @media (min-width: 48rem) {
+        .site-header {
+            flex-wrap: nowrap;
+        }
+
+        .site-logo {
+            width: 20rem;
+        }
+
+        .site-nav {
+            flex-basis: auto;
+        }
+
         .nav-list {
-            grid-template-columns: repeat(4, auto);
+            flex-direction: row;
+            gap: var(--space-md);
+        }
+
+        .nav-list a {
+            min-height: 0;
+            border-top: 0;
         }
     }
 </style>

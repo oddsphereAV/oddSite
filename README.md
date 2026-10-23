@@ -33,7 +33,7 @@ npm run preview  # preview the production build locally
 │   ├── assets/img/             # Images that are imported (so they get compressed)
 │   ├── components/
 │   │   ├── Head.astro          # <head> contents; each page passes its <title> in
-│   │   ├── Header.astro        # Logo and site navigation
+│   │   ├── Header.astro        # Logo, site navigation and the mobile menu button
 │   │   ├── Footer.astro        # Social links and copyright
 │   │   ├── Grid.astro          # Grid wrapper; holds anything placed inside it
 │   │   ├── ArtworkCard.astro   # One artwork: image (optimized) and caption
@@ -141,6 +141,7 @@ Log posts: `title`, `date`, `description` (optional), `cover` (optional), `tags`
 - [x] Grid component (renamed from Gallery); square cropped thumbnails
 - [x] Content model: releases, tracks, graphics (per-kind fields), log, about; shared tags
 - [x] Drafts hidden on piece pages
+- [x] Mobile menu (Menu button under 48rem; nav stays open without JavaScript)
 - [x] Audio pages: release grid, release pages, Beatport-style track table
 
 **Foundation**
