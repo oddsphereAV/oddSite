@@ -15,11 +15,11 @@ const { rows, showRelease = true } = Astro.props as { rows: TrackRow[]; showRele
                 <tr>
                     <th scope="col" class="num">#</th>
                     <th scope="col">Title</th>
-                    <th scope="col" class="hide-sm">Artist</th>
-                    {showRelease && <th scope="col">Release</th>}
-                    <th scope="col" class="hide-sm">Genre</th>
-                    <th scope="col" class="num">BPM</th>
-                    <th scope="col" class="num">Time</th>
+                    <th scope="col" class="artist">Artist</th>
+                    {showRelease && <th scope="col" class="release">Release</th>}
+                    <th scope="col" class="genre">Genre</th>
+                    <th scope="col" class="num bpm">BPM</th>
+                    <th scope="col" class="num time">Time</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,11 +27,11 @@ const { rows, showRelease = true } = Astro.props as { rows: TrackRow[]; showRele
                     <tr data-track={track.id} data-audio={track.data.audio}>
                         <td class="num">{track.data.trackNumber}</td>
                         <td class="title">{track.data.title}</td>
-                        <td class="hide-sm">{track.data.artist}</td>
-                        {showRelease && <td><a href={`/audio/${release.id}/`}>{release.data.title}</a></td>}
-                        <td class="hide-sm">{track.data.genre}</td>
-                        <td class="num">{track.data.bpm}</td>
-                        <td class="num">{formatDuration(track.data.duration)}</td>
+                        <td class="artist">{track.data.artist}</td>
+                        {showRelease && <td class="release"><a href={`/audio/${release.id}/`}>{release.data.title}</a></td>}
+                        <td class="genre">{track.data.genre}</td>
+                        <td class="num bpm" data-label="BPM">{track.data.bpm}</td>
+                        <td class="num time">{formatDuration(track.data.duration)}</td>
                     </tr>
                 ))}
             </tbody>
@@ -76,9 +76,76 @@ const { rows, showRelease = true } = Astro.props as { rows: TrackRow[]; showRele
         color: var(--color-text-heading);
     }
 
-    /* keep BPM and time visible on phones */
+    /* phones: each track becomes two lines instead of a sideways-scrolling table
+       line 1: number, title, time    line 2: release, BPM */
     @media (max-width: 40rem) {
-        .hide-sm {
+        .table-wrap {
+            overflow-x: visible;
+        }
+
+        thead {
+            position: absolute; /* keep for screen readers */
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+        }
+
+        .track-table,
+        tbody {
+            display: block;
+        }
+
+        tbody tr {
+            display: grid;
+            grid-template-columns: 2em minmax(0, 1fr) auto;
+            column-gap: var(--space-sm);
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid var(--color-text-subtle);
+        }
+
+        td {
+            padding: 0;
+            border: 0;
+            white-space: normal;
+        }
+
+        td.num:first-child {
+            grid-row: 1 / span 2;
+            align-self: center;
+            color: var(--color-text-subtle);
+        }
+
+        td.title {
+            grid-column: 2;
+        }
+
+        td.time {
+            grid-column: 3;
+            grid-row: 1;
+        }
+
+        td.release {
+            grid-column: 2;
+            grid-row: 2;
+            font-size: var(--text-sm);
+            overflow-wrap: anywhere;
+        }
+
+        td.bpm {
+            grid-column: 3;
+            grid-row: 2;
+            font-size: var(--text-sm);
+            color: var(--color-text-subtle);
+        }
+
+        td.bpm::after {
+            content: " " attr(data-label);
+        }
+
+        /* artist and genre are on the release page and in search; hidden here for space */
+        td.artist,
+        td.genre {
             display: none;
         }
     }
