@@ -43,3 +43,12 @@ import Grid from "../components/Grid.astro";
         <!-- ---------------- -->
     </body>
 </html>
+<style>
+    /* Bandcamp "large" player size; without it iframes default to 300x150 and crop the art */
+    iframe {
+        display: block;
+        border: 0;
+        width: 350px;
+        height: 442px;
+    }
+</style>

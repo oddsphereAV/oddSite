@@ -47,6 +47,15 @@ const path = Astro.url.pathname;
         width: 20rem;
     }
 
+    .site-nav a {
+        text-decoration: none;
+    }
+
+    .site-nav a[aria-current="page"] {
+        color: var(--color-text-heading);
+        font-weight: bold;
+    }
+
     .nav-list {
         display: grid;
         grid-template-columns: repeat(2, auto);

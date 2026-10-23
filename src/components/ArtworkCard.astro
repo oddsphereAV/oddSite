@@ -1,22 +1,26 @@
 ---
 // What each card receives from one page
 // width/height = image resolution
-const { src, alt, title, width, height } = Astro.props;
+// href (optional) = makes the image a link
+const { src, alt, title, width, height, showTitle = true, href } = Astro.props;
 ---
 <!-- Parameter locations -->
 <figure class="gallery-item">
-    <img 
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        loading="lazy"
-        decoding="async"
-    />
-    <figcaption> {title} </figcaption>
+    {href ? (
+        <a href={href}>
+            <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+        </a>
+    ) : (
+        <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+    )}
+    {showTitle && <figcaption> {title} </figcaption>}
 </figure>
 
 <style>
+    .gallery-item a {
+        display: block;
+    }
+
     .gallery-item img {
         width: 100%;
         height: auto;
