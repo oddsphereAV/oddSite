@@ -1,0 +1,90 @@
+---
+import { formatDuration } from '../lib/format';
+import type { TrackRow } from '../lib/audio';
+
+// rows = tracks paired with their release (see lib/audio.ts)
+// showRelease = false on a release page, where the release is already obvious
+const { rows, showRelease = true } = Astro.props as { rows: TrackRow[]; showRelease?: boolean };
+---
+{rows.length === 0 ? (
+    <p class="empty">No tracks yet.</p>
+) : (
+    <div class="table-wrap">
+        <table class="track-table">
+            <thead>
+                <tr>
+                    <th scope="col" class="num">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col" class="hide-sm">Artist</th>
+                    {showRelease && <th scope="col">Release</th>}
+                    <th scope="col" class="hide-sm">Genre</th>
+                    <th scope="col" class="num">BPM</th>
+                    <th scope="col" class="num">Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {rows.map(({ track, release }) => (
+                    <tr data-track={track.id} data-audio={track.data.audio}>
+                        <td class="num">{track.data.trackNumber}</td>
+                        <td class="title">{track.data.title}</td>
+                        <td class="hide-sm">{track.data.artist}</td>
+                        {showRelease && <td><a href={`/audio/${release.id}/`}>{release.data.title}</a></td>}
+                        <td class="hide-sm">{track.data.genre}</td>
+                        <td class="num">{track.data.bpm}</td>
+                        <td class="num">{formatDuration(track.data.duration)}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>
+)}
+
+<style>
+    /* scroll the table, not the page, on narrow screens */
+    .table-wrap {
+        overflow-x: auto;
+        margin-top: var(--space-lg);
+    }
+
+    .track-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-variant-numeric: tabular-nums;
+    }
+
+    th, td {
+        padding: var(--space-xs) var(--space-sm);
+        text-align: left;
+        white-space: nowrap;
+        border-bottom: 1px solid var(--color-text-subtle);
+    }
+
+    thead th {
+        font-size: var(--text-sm);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-text-subtle);
+        border-bottom-color: var(--color-text-heading);
+    }
+
+    .num {
+        text-align: right;
+    }
+
+    .title {
+        font-weight: bold;
+        color: var(--color-text-heading);
+    }
+
+    /* keep BPM and time visible on phones */
+    @media (max-width: 40rem) {
+        .hide-sm {
+            display: none;
+        }
+    }
+
+    .empty {
+        margin-top: var(--space-lg);
+        color: var(--color-text-subtle);
+    }
+</style>

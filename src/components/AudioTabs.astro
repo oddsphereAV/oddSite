@@ -1,0 +1,29 @@
+---
+// Switch between the release grid and the track table
+const path = Astro.url.pathname.replace(/\/$/, '');
+---
+<nav class="audio-tabs" aria-label="Audio views">
+    <a href="/audio/" aria-current={path === '/audio' ? 'page' : undefined}> Releases </a>
+    <a href="/audio/tracks/" aria-current={path === '/audio/tracks' ? 'page' : undefined}> Tracks </a>
+</nav>
+
+<style>
+    .audio-tabs {
+        display: flex;
+        gap: var(--space-md);
+        margin-top: var(--space-sm);
+    }
+
+    .audio-tabs a,
+    .audio-tabs a:visited {
+        color: var(--color-link);
+        text-decoration: none;
+    }
+
+    .audio-tabs a[aria-current="page"] {
+        color: var(--color-text-heading);
+        font-weight: bold;
+        text-decoration: underline;
+        text-underline-offset: 0.3em;
+    }
+</style>

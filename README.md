@@ -45,10 +45,10 @@ npm run preview  # preview the production build locally
 │   │   ├── log/                # Blog posts
 │   │   └── about/              # About page text and photo
 │   ├── content.config.ts       # Collection definitions: the fields every item must have
-│   ├── lib/                    # Small helpers (tag cleanup, duration formatting)
+│   ├── lib/                    # Small helpers (tag cleanup, duration formatting, audio queries)
 │   └── pages/                  # Each file becomes a page
 │       ├── index.astro         # /
-│       ├── audio.astro         # /audio
+│       ├── audio/              # /audio (release grid), /audio/tracks (track table), /audio/<release>
 │       ├── graphics.astro      # /graphics
 │       └── about.astro         # /about
 ├── astro.config.mjs
@@ -141,6 +141,7 @@ Log posts: `title`, `date`, `description` (optional), `cover` (optional), `tags`
 - [x] Grid component (renamed from Gallery); square cropped thumbnails
 - [x] Content model: releases, tracks, graphics (per-kind fields), log, about; shared tags
 - [x] Drafts hidden on piece pages
+- [x] Audio pages: release grid, release pages, Beatport-style track table
 
 **Foundation**
 - [ ] Shared `BaseLayout`
@@ -157,9 +158,6 @@ Log posts: `title`, `date`, `description` (optional), `cover` (optional), `tags`
 - [ ] Interactive GLSL pieces: WebGL2 runner for Shadertoy-style `mainImage` (`iTime`, `iResolution`, `iMouse`)
 
 **Audio**
-- [ ] Audio page: release grid (like oddsphere.bandcamp.com)
-- [ ] Release pages (`/audio/<release>`): cover, details, track list, buy link
-- [ ] Track view: Beatport-style table (title, artist, release, genre, BPM, time)
 - [ ] On-site player (SoundCloud-style layout and controls) that keeps playing across pages (Astro page transitions with `transition:persist`)
 - [ ] R2 audio bucket and domain
 
