@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 
 const { release, rows } = Astro.props;
 const { Content } = await render(release);
-const { title, artist, type, date, cover, genres, bandcamp } = release.data;
+const { title, artist, type, date, cover, bandcamp } = release.data;
 ---
 
 <!DOCTYPE html>
@@ -44,7 +44,6 @@ const { title, artist, type, date, cover, genres, bandcamp } = release.data;
                     <h1>{title}</h1>
                     <p class="meta">
                         {artist} &middot; {typeLabel[type]} &middot; {date.getFullYear()}
-                        {genres.length > 0 && <> &middot; {genres.join(', ')}</>}
                     </p>
                     <Content />
                     {bandcamp && <p><a href={bandcamp} target="_blank" rel="noopener">Buy / download on Bandcamp</a></p>}
