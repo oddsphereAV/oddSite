@@ -171,6 +171,9 @@ Log posts: `title`, `date`, `description` (optional), `cover` (optional), `tags`
 
 **Later**
 - [ ] Global fuzzy search over every collection, including BPM, genre and tags (ported from the earlier site's TypeScript search, or written fresh); Pagefind as a fallback
+  - Aliases (`dnb` = `drum-and-bass`, `glsl` = `shader`) from a lookup table in `src/lib/aliases.ts`, applied to tags, genres and queries
+  - Terms combine with AND (`dnb 174` = drum and bass at 174 BPM); numbers and `170-175` ranges match BPM; each word is fuzzy-matched separately
+  - Optional field operators (`genre:`, `tag:`, `bpm:`) and filter chips; results grouped by kind
 - [ ] Posting workflow (Markdown in git, media to R2/Bunny; an editor UI only if hand-editing becomes a chore)
 - [ ] RSS
 - [ ] Share images (Open Graph)
