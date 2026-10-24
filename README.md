@@ -44,10 +44,12 @@ npm run preview  # preview the production build locally
 │   │   ├── graphics/           # Image, video and interactive pieces
 │   │   ├── log/                # Blog posts
 │   │   └── about/              # About page text and photo
+│   ├── data/
+│   │   └── releases.json       # The releases on the home page (newest first, top five shown)
 │   ├── content.config.ts       # Collection definitions: the fields every item must have
 │   ├── lib/                    # Small helpers (tag cleanup, duration formatting, audio queries)
 │   └── pages/                  # Each file becomes a page
-│       ├── index.astro         # /
+│       ├── index.astro         # / (the one-page home: releases, Instagram, contact, socials)
 │       ├── audio/              # /audio (release grid), /audio/tracks (track table), /audio/<release>
 │       ├── graphics.astro      # /graphics
 │       └── about.astro         # /about
@@ -178,3 +180,19 @@ Log posts: `title`, `date`, `description` (optional), `cover` (optional), `tags`
 - [ ] Share images (Open Graph)
 
 **Dropped:** print shop. (The tracks table, persistent player and self-hosted audio were dropped earlier and are back in.)
+
+## Adding a release to the home page
+
+Add an entry at the top of `src/data/releases.json`. The page shows the five newest.
+
+```json
+{
+  "title": "Title",
+  "type": "Single",
+  "year": 2025,
+  "bandcamp": "https://oddsphere.bandcamp.com/track/title",
+  "soundcloud": "https://soundcloud.com/oddspheremusic/title"
+}
+```
+
+`type` is shown as the tag on the card (Single, EP, Album). `bandcamp` and `soundcloud` are each optional. A release with only one link shows only that button, and the title links to Bandcamp when there is one.
