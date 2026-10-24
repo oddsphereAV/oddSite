@@ -161,18 +161,17 @@ html.circles .lnk .lb{position:absolute;width:1px;height:1px;overflow:hidden;cli
 
 .foot{text-align:center;font-family:var(--b4);font-size:clamp(.7rem,.9vw,.85rem);text-transform:uppercase;letter-spacing:.08em;color:var(--ink);padding:0 14px clamp(1rem,2.4vh,1.6rem);opacity:.75}
 @media(prefers-color-scheme:dark){.foot{color:var(--line)}}
-/* menu feel: springy hover, pop-in on load, slow logo wobble */
+/* menu feel: springy hover, pop-in on load */
 .row,.cap,.lnk{transition-timing-function:cubic-bezier(.34,1.56,.64,1)}
 .cap:hover,.cap:focus-visible{transform:translate(4px,4px) scale(1.012,.99)}
 .lnk:hover,.lnk:focus-visible{transform:translateY(-3px) scale(1.04,.97)}
 @keyframes pop{0%{opacity:0;transform:translateY(26px) scale(.9)}55%{opacity:1;transform:translateY(-5px) scale(1.02)}100%{opacity:1;transform:none}}
-@keyframes wob{0%,100%{transform:rotate(-1.4deg) scale(1)}50%{transform:rotate(1.4deg) scale(1.025)}}
 .mk{display:block;width:fit-content;max-width:100%}
-html.wob .mk{animation:wob 7s ease-in-out infinite;transition:translate .25s ease-out}
 .mark{animation:pop .7s cubic-bezier(.34,1.56,.64,1) backwards}
 .rows li{animation:pop .65s cubic-bezier(.34,1.56,.64,1) backwards}
 .rows li:nth-child(1){animation-delay:.12s}.rows li:nth-child(2){animation-delay:.2s}.rows li:nth-child(3){animation-delay:.28s}
 .cap.insta{animation:pop .65s cubic-bezier(.34,1.56,.64,1) .18s backwards}.cap.mail{animation:pop .65s cubic-bezier(.34,1.56,.64,1) .26s backwards}.links{animation:pop .65s cubic-bezier(.34,1.56,.64,1) .34s backwards}
+@media(max-width:1200px){.links{gap:clamp(1.15rem,3.6vw,1.9rem)}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style></head><body>
 <canvas id="bg" aria-hidden="true"></canvas>
@@ -197,7 +196,7 @@ html.wob .mk{animation:wob 7s ease-in-out infinite;transition:translate .25s eas
 
 <script id="fs" type="x-shader/x-fragment">#version 300 es
 precision highp float;
-uniform vec2 uRes;uniform float uT;uniform float uDark;uniform int uPat;uniform float uTint;
+uniform vec2 uRes;uniform float uT;uniform float uDark;uniform int uPat;
 out vec4 o;
 float h(vec2 p){p=fract(p*vec2(443.897,441.423));p+=dot(p,p.yx+19.19);return fract((p.x+p.y)*p.x);}
 float vn(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
@@ -218,10 +217,7 @@ void main(){
     float lv=0.;for(int i=1;i<10;i++){lv+=smoothstep(-w,w,n-float(i)/N);}
     lv/=(N-1.);
     vec3 lo=mix(vec3(.985),vec3(.035),uDark),hi=mix(vec3(.80),vec3(.19),uDark);
-    vec3 c0=mix(lo,hi,lv);
-    vec3 tc=mix(vec3(.733,1.,0.),vec3(1.,.416,.075),clamp(uv.x/asp*.9+uv.y*.35-.1,0.,1.));
-    c0=mix(c0,tc,uTint*.16*mix(1.-lv,lv,uDark));
-    o=vec4(c0,1.);return;
+    o=vec4(mix(lo,hi,lv),1.);return;
   }
   if(uPat==0){ /* dots: Kirby polka, staggered rows, dots breathe */
     vec2 p=uv*11.+vec2(uT*.02,uT*.012);p.x+=.5*mod(floor(p.y),2.);
@@ -308,11 +304,11 @@ void main(){
   const pr=gl.createProgram();gl.attachShader(pr,vs);gl.attachShader(pr,fs);gl.linkProgram(pr);
   if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){cv.remove();return}
   gl.useProgram(pr);
-  const TOFF=+q.get('t')||0;const NAMES=['dots','checker','sparkles','rings','waves','daisies','flow','arcs','arcstint','terrain'];let pat=NAMES.indexOf(q.get('bg'));if(pat<0)pat=9;const uPat=gl.getUniformLocation(pr,'uPat');const uRes=gl.getUniformLocation(pr,'uRes'),uT=gl.getUniformLocation(pr,'uT'),uDark=gl.getUniformLocation(pr,'uDark'),uTint=gl.getUniformLocation(pr,'uTint');
+  const TOFF=+q.get('t')||0;const NAMES=['dots','checker','sparkles','rings','waves','daisies','flow','arcs','arcstint','terrain'];let pat=NAMES.indexOf(q.get('bg'));if(pat<0)pat=9;const uPat=gl.getUniformLocation(pr,'uPat');const uRes=gl.getUniformLocation(pr,'uRes'),uT=gl.getUniformLocation(pr,'uT'),uDark=gl.getUniformLocation(pr,'uDark');
   const mq=matchMedia('(prefers-color-scheme: dark)'),rm=matchMedia('(prefers-reduced-motion: reduce)');
   function size(){let s=Math.min(devicePixelRatio||1,2);const px=innerWidth*innerHeight;if(px*s*s>6e6)s=Math.max(.75,Math.sqrt(6e6/px));cv.width=Math.max(2,Math.round(innerWidth*s));cv.height=Math.max(2,Math.round(innerHeight*s));gl.viewport(0,0,cv.width,cv.height)}
   let t0=performance.now(),last=0,raf=0;
-  function draw(now){gl.uniform2f(uRes,cv.width,cv.height);gl.uniform1f(uT,rm.matches?(TOFF||21.4):(now-t0)/1000+TOFF);gl.uniform1f(uDark,mq.matches?1:0);gl.uniform1i(uPat,pat);gl.uniform1f(uTint,q.get('tint')?1:0);gl.drawArrays(gl.TRIANGLES,0,3)}
+  function draw(now){gl.uniform2f(uRes,cv.width,cv.height);gl.uniform1f(uT,rm.matches?(TOFF||21.4):(now-t0)/1000+TOFF);gl.uniform1f(uDark,mq.matches?1:0);gl.uniform1i(uPat,pat);gl.drawArrays(gl.TRIANGLES,0,3)}
   function loop(now){raf=requestAnimationFrame(loop);if(now-last<33)return;last=now;draw(now)}
   function start(){cancelAnimationFrame(raf);if(rm.matches||document.hidden){draw(performance.now());return}raf=requestAnimationFrame(loop)}
   addEventListener('resize',()=>{size();draw(performance.now())});
@@ -324,10 +320,6 @@ void main(){
 (function(){
   try{document.getElementById('yr').textContent=new Date().getFullYear()}catch(e){}
   var mk=document.querySelector('.mk');
-  if(/wob/.test(location.hash))document.documentElement.classList.add('wob');
-  if(mk&&/wob/.test(location.hash)&&matchMedia('(hover:hover) and (min-width:1201px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
-    addEventListener('mousemove',function(e){mk.style.translate=((e.clientX/innerWidth-.5)*14).toFixed(1)+'px '+((e.clientY/innerHeight-.5)*10).toFixed(1)+'px'});
-  }
   /* arrow keys walk the menu: releases, Instagram, contact, socials */
   var items=[].slice.call(document.querySelectorAll('.rows .t,.cap,.lnk'));
   addEventListener('keydown',function(e){
