@@ -62,6 +62,11 @@ The one-page home on `main` is the visual language. This branch explores a multi
 - **Where play buttons start it:** a play circle on a release page or a track row.
 - **Open:** you said Neuromancer can play, so I'm assuming you have the right to stream it from your own site.
 
+## Mock-ups
+
+- `docs/mockups/audio-and-nav.html`: navigation and the Audio page (Releases and Tracks tabs).
+- `docs/mockups/release-and-player.html`: a release page (Flipside) and the docked player, collapsed and expanded. Add `#open` to the address to see the expanded player.
+
 ## Still to design
 
 - Navigation (capsule row; "Menu" capsule on phones).
