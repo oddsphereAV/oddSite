@@ -30,9 +30,21 @@ The one-page home on `main` is the visual language. This branch explores a multi
 - **Graphics grid:** thick-outlined rounded tiles; hover squashes and shows the title tag; filters are pills.
 - **Footer:** the copyright line plus the three social capsules.
 
+## Decisions so far
+
+1. **Home:** the current one-page design is the draft for the new home page, with refinements.
+   - The Graphics card links to `/graphics` instead of Instagram.
+   - Release cards link to their own release pages.
+
+## Home page refinements to work out
+
+- **Instagram:** moves to the social row (as a fourth capsule) and to the Graphics page.
+- **Release card click:** the card goes to `/audio/<release>`. Bandcamp and Soundcloud stay as the two buttons that appear on hover or tap. On phones the tray needs a third, clear way into the release page.
+- **Graphics card:** could show a tiny strip of the newest pieces so it previews what's inside.
+
 ## Open questions
 
-1. Is the home page still the front door, or does each section get its own landing page?
+1. ~~Is the home page still the front door?~~ Yes, see decisions.
 2. Colour per section (lime = Audio, orange = Graphics, something for Log and About), or one accent throughout?
 3. Does the dotwave background stay on every page, or does each section get its own?
 4. Is the audio player back in scope, or does Bandcamp stay the player?
