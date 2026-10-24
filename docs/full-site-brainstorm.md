@@ -36,6 +36,8 @@ The one-page home on `main` is the visual language. This branch explores a multi
    - The Graphics card links to `/graphics` instead of Instagram.
    - Release cards link to their own release pages.
 
+2. **Colour:** one accent throughout the site, not a colour per section. Which accent, and what happens to the orange, is still to decide.
+
 ## Home page refinements to work out
 
 - **Instagram:** moves to the social row (as a fourth capsule) and to the Graphics page.
@@ -45,7 +47,7 @@ The one-page home on `main` is the visual language. This branch explores a multi
 ## Open questions
 
 1. ~~Is the home page still the front door?~~ Yes, see decisions.
-2. Colour per section (lime = Audio, orange = Graphics, something for Log and About), or one accent throughout?
+2. ~~Colour per section or one accent?~~ One accent throughout. Which one?
 3. Does the dotwave background stay on every page, or does each section get its own?
 4. Is the audio player back in scope, or does Bandcamp stay the player?
 5. What belongs on Log and About now, given how much you want to maintain?
