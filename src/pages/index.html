@@ -13,6 +13,7 @@
 @media(prefers-color-scheme:dark){:root{--bg:#0d0d0c;--ring:rgba(255,255,255,.05);--line:#f4f4ef}}
 @media(max-width:600px){:root{--slant:-4deg}}
 *,*::before,*::after{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:clip}
 body{margin:0;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;color:var(--ink);-webkit-font-smoothing:antialiased;
   background-color:var(--bg);
   background-image:radial-gradient(circle at 88% 84%,transparent 0 6rem,var(--ring) 6rem 6.25rem,transparent 6.25rem 10rem,var(--ring) 10rem 10.25rem,transparent 10.25rem),radial-gradient(circle at 6% 20%,transparent 0 5rem,var(--ring) 5rem 5.25rem,transparent 5.25rem 8.5rem,var(--ring) 8.5rem 8.75rem,transparent 8.75rem);
@@ -30,27 +31,26 @@ a{color:inherit;text-decoration:none}
 .rows li:nth-child(1){margin-left:clamp(.8rem,2vw,2.2rem)}
 .rows li:nth-child(2){margin-left:clamp(2rem,5vw,5.4rem)}
 .rows li:nth-child(3){margin-left:clamp(1rem,2.6vw,2.8rem)}
-.row{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:.5rem 1rem;background:var(--lime);border:5px solid var(--line);border-radius:999px;padding:clamp(.3rem,1.8vh,1.1rem) clamp(1.8rem,3vw,2.8rem) clamp(.3rem,1.8vh,1.1rem) clamp(.4rem,.9vw,.65rem);box-shadow:inset 0 0 0 3px var(--bg),6px 8px 0 var(--line);transition:transform .12s,background .12s,color .12s}
+.row{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:0 1rem;background:var(--lime);border:5px solid var(--line);border-radius:999px;padding:clamp(.3rem,1.8vh,1.1rem) clamp(1.8rem,3vw,2.8rem) clamp(.3rem,1.8vh,1.1rem) clamp(.4rem,.9vw,.65rem);box-shadow:inset 0 0 0 3px var(--bg),6px 8px 0 var(--line);transition:transform .12s,background .12s,color .12s}
 .pl{display:grid;place-items:center;width:clamp(2.5rem,7.2vh,4.3rem);aspect-ratio:1;border-radius:50%;background:var(--ink);color:var(--lime)}
 .pl svg{width:38%;height:38%}
 .t{display:block;font-family:var(--b5);font-weight:400;font-size:min(clamp(1.05rem,2vw,1.9rem),3.9cqw);line-height:1.12;text-transform:uppercase;transform:skewX(var(--slant));transform-origin:left center;padding-right:.4em;overflow-wrap:anywhere;color:inherit}
 .meta{display:grid;grid-template-columns:5.4em 4.6em;column-gap:1rem;align-items:center}
 .k{font-family:var(--b4);font-weight:400;font-size:clamp(.78rem,1.2vw,1.05rem);text-transform:uppercase;text-align:right;letter-spacing:.04em}
 .y{font-family:var(--b7);font-weight:400;font-size:clamp(.78rem,1.2vw,1.05rem);text-align:center;border:3px solid var(--ink);border-radius:999px;padding:.15em 0;background:var(--lime);width:4.6em}
-/* hover, focus or tap: a tray pops out underneath with a Bandcamp and a Soundcloud button; year and type stay put */
+/* hover, focus or tap: the row itself grows and the Bandcamp and Soundcloud buttons appear under the title */
 .rows li{position:relative}
 .rows li:hover,.rows li:focus-within,.rows li:has(.row.open){z-index:6}
-.acts{position:absolute;right:clamp(1.8rem,3vw,2.8rem);top:calc(100% + 14px);display:flex;gap:.55rem;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .14s,transform .14s,visibility 0s .14s;z-index:7}
-.acts::before{content:"";position:absolute;left:-.4rem;right:-.4rem;top:-20px;height:20px}
+.acts{grid-column:2/-1;display:flex;flex-wrap:wrap;gap:.55rem;max-height:0;overflow:hidden;opacity:0;visibility:hidden;padding:0 8px 0 0;transition:max-height .18s,padding .18s,opacity .14s,visibility 0s .18s}
 .act{display:inline-flex;align-items:center;gap:.5rem;background:var(--cream);color:var(--ink);border:3px solid var(--line);border-radius:999px;padding:.12rem .85rem .12rem .16rem;box-shadow:inset 0 0 0 2px var(--bg),3px 4px 0 var(--line);transition:background .12s,transform .12s}
 .act .ai{display:grid;place-items:center;width:clamp(1.6rem,3.6vh,2rem);aspect-ratio:1;border-radius:50%;background:var(--ink);color:var(--cream);flex:none}
 .act .ai svg{width:56%;height:56%}
 .act .al{font-family:var(--b7);font-size:clamp(.7rem,.95vw,.88rem);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
 .act:hover,.act:focus-visible{background:var(--lime);transform:translateY(-2px)}
-.row:hover,.row:focus-within,.row.open{background:var(--ink);color:var(--lime);transform:translateX(6px)}
+.row:hover,.row:focus-within,.row.open{background:var(--ink);color:var(--lime)}
 .row:hover .pl,.row:focus-within .pl,.row.open .pl{background:var(--lime);color:var(--ink)}
 .row:hover .y,.row:focus-within .y,.row.open .y{background:var(--ink);border-color:var(--lime)}
-.row:hover .acts,.row:focus-within .acts,.row.open .acts{opacity:1;visibility:visible;transform:none;transition:opacity .14s,transform .14s,visibility 0s}
+.row:hover .acts,.row:focus-within .acts,.row.open .acts{max-height:4.2rem;padding:.5rem 8px 7px 0;opacity:1;visibility:visible;transition:max-height .18s,padding .18s,opacity .14s,visibility 0s}
 
 .right{display:grid;grid-template-rows:1fr 1fr auto;gap:clamp(.9rem,3.2vh,2.4rem);min-width:0}
 .cap{display:grid;align-content:space-evenly;gap:clamp(.3rem,.9vh,.7rem);border:5px solid var(--line);border-radius:clamp(3rem,7vw,7.5rem);box-shadow:inset 0 0 0 3px var(--bg),7px 9px 0 var(--line);container-type:inline-size;transition:transform .12s;padding:clamp(1.1rem,3.8vh,2.6rem) clamp(2.6rem,4.6vw,4.6rem)}
@@ -69,9 +69,10 @@ a{color:inherit;text-decoration:none}
 
 /* elsewhere: small capsules, brand icon in a round cap, name inside */
 .links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.5rem,1vw,1rem);margin-top:clamp(.2rem,1vh,.8rem);container-type:inline-size}
-.lnk{display:flex;justify-content:center;min-width:0;align-items:center;gap:clamp(.5rem,.8vw,.8rem);background:var(--cream);border:5px solid var(--line);border-radius:999px;padding:clamp(.25rem,.7vh,.45rem) clamp(1rem,1.6vw,1.5rem) clamp(.25rem,.7vh,.45rem) clamp(.25rem,.5vw,.4rem);box-shadow:inset 0 0 0 3px var(--bg),5px 7px 0 var(--line);transition:transform .12s,background .12s}
+.lnk{display:flex;justify-content:flex-start;min-width:0;align-items:center;gap:clamp(.5rem,.8vw,.8rem);background:var(--cream);border:5px solid var(--line);border-radius:999px;padding:clamp(.25rem,.7vh,.45rem) clamp(1rem,1.6vw,1.5rem) clamp(.25rem,.7vh,.45rem) clamp(.25rem,.5vw,.4rem);box-shadow:inset 0 0 0 3px var(--bg),5px 7px 0 var(--line);transition:transform .12s,background .12s}
 .lnk .ic{display:grid;place-items:center;width:clamp(2.2rem,6.2vh,3.7rem);aspect-ratio:1;border-radius:50%;background:var(--ink);color:var(--cream);flex:none}
 .lnk .ic svg{width:56%;height:56%}
+.lnk[aria-label=Soundcloud] .ic svg,.act .ai svg.sc{width:64%;height:64%;transform:translateX(-4%)}
 .lnk .lb{font-family:var(--b7);font-size:clamp(.78rem,1.1vw,1.05rem);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;color:var(--ink)}
 .lnk:hover,.lnk:focus-visible{background:var(--lime);transform:translateY(-3px)}
 /* alternative: icon-only round buttons (add #links=circles) */
@@ -104,7 +105,7 @@ html[data-cap="b"] .mail .chips span{background:var(--orange)}
 /* C: no stretching. Capsules keep their natural size, and the whole right column sits centred beside the music */
 html[data-cap="c"] .right{grid-template-rows:none;align-self:center}
 html[data-cap="c"] .cap{align-content:center}
-@media(max-width:480px){.act .al{display:none}.act{padding:.2rem}}
+@media(max-width:340px){.act .al{display:none}.act{padding:.2rem}}
 @media(max-width:1200px){html[data-cap] .right{align-self:auto}html[data-cap="a"] .disc2{width:4.4rem}html[data-cap="a"] .cap.insta{padding:1rem 1.2rem 1rem 2.6rem}html[data-cap="a"] .cap.mail{padding:1rem 2.6rem 1rem 1.2rem}html[data-cap="a"] .sub{white-space:normal}}
 html.circles .links{display:flex!important;justify-content:flex-start!important;gap:clamp(.8rem,1.6vw,1.4rem)!important}
 html.circles .lnk{padding:0!important;width:clamp(3.8rem,10vh,5.6rem)!important;flex:none!important}
@@ -116,8 +117,8 @@ html.circles .lnk .lb{position:absolute;width:1px;height:1px;overflow:hidden;cli
   .stage{grid-template-columns:minmax(0,1fr)}
   .cap.mail{margin-left:0}
   .rows li{margin-left:0!important}
+  .mark{margin-left:auto;margin-right:auto}
   .t{font-size:min(clamp(1rem,2.6vw,1.7rem),3.9cqw)}
-  .acts{right:1.2rem}
   .plain{font-family:var(--b7);font-weight:400;color:var(--ink);text-transform:uppercase;transform:skewX(var(--slant));transform-origin:left bottom;display:inline-block;line-height:1}
 .big{font-size:min(calc(clamp(1.3rem,5vw,3rem)*var(--k)),12cqw)}
   .addr{font-size:min(calc(clamp(1.1rem,4.4vw,2.4rem)*var(--k)),9.6cqw)}
@@ -125,6 +126,8 @@ html.circles .lnk .lb{position:absolute;width:1px;height:1px;overflow:hidden;cli
 }
 /* phones: smaller circles inside the green releases and the social links */
 @media(max-width:700px){
+  .acts{grid-column:1/-1;flex-wrap:nowrap;justify-content:center;padding-right:0}
+  .row:hover .acts,.row:focus-within .acts,.row.open .acts{padding-right:0}
   .pl{width:2.7rem}
   .pl svg{width:36%;height:36%}
   .row{padding-left:.4rem}
