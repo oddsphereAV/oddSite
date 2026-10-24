@@ -220,7 +220,7 @@ html.circles .lnk .lb{position:absolute;width:1px;height:1px;overflow:hidden;cli
 <style is:inline>
 /* desktop: hovering or focusing a release grows the card the same way, with the buttons on their own line below the title */
 @media (hover:hover) and (pointer:fine) and (min-width:701px){
-  .row.has-tag .acts{grid-row:3;grid-column:1/-1;justify-self:stretch;align-self:auto;justify-content:center;gap:.7rem;max-height:0;overflow:hidden;opacity:0;visibility:hidden;transform:none;margin:0;padding:0;transition:max-height .28s ease,padding .28s ease,opacity .2s ease,visibility 0s .28s}
+  .row.has-tag .acts{grid-row:3;grid-column:2/-1;justify-self:stretch;align-self:auto;justify-content:flex-start;gap:.7rem;max-height:0;overflow:hidden;opacity:0;visibility:hidden;transform:none;margin:0;padding:0;transition:max-height .28s ease,padding .28s ease,opacity .2s ease,visibility 0s .28s}
   .row.has-tag:hover .acts,.row.has-tag:focus-within .acts,.row.has-tag.open .acts{max-height:5rem;padding:.7rem 0 .15rem;opacity:1;visibility:visible;transform:none;transition:max-height .28s ease,padding .28s ease,opacity .2s ease .08s,visibility 0s}
   .row.has-tag:hover .tag.grp,.row.has-tag:focus-within .tag.grp,.row.has-tag.open .tag.grp{opacity:1;transform:none}
   .row.has-tag .act{flex:0 0 auto;min-height:2.3rem;font-size:clamp(.7rem,.85vw,.85rem);padding:.4em 1.6em}
