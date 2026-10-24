@@ -192,6 +192,12 @@ html.circles .lnk .lb{position:absolute;width:1px;height:1px;overflow:hidden;cli
 .row.has-tag{border-radius:calc(var(--pl)/2 + var(--gap) + 5px + .55rem)}
 .row.has-tag:hover .tag.grp,.row.has-tag:focus-within .tag.grp,.row.has-tag.open .tag.grp{background:var(--lime);color:var(--ink)}
 </style>
+<style>
+.row{transition:transform .16s cubic-bezier(.34,1.56,.64,1),background .12s,color .12s}
+.row:hover,.row:focus-within,.row.open{transform:translate(4px,5px) scale(1.012,.99)}
+.act{transition:background .12s,color .12s,transform .16s cubic-bezier(.34,1.56,.64,1)}
+.act:hover,.act:focus-visible{transform:translateY(-2px) scale(1.05,.96)}
+</style>
 </head><body>
 <canvas id="bg" aria-hidden="true"></canvas>
 <main class="stage pad">
