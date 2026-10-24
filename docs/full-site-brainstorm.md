@@ -43,7 +43,7 @@ The one-page home on `main` is the visual language. This branch explores a multi
 - Log: occasional posts. About: one page.
 
 **Look**
-- Lime for music (Audio), orange for graphics (Graphics), purple for Log and About.
+- Orange for music (Audio), lime for graphics (Graphics), purple for Log, teal for About. (This flips the current home page, where music is lime and graphics is orange.)
 - Dotted background on the home page only.
 - No background pattern on inner pages: a plain white or black page.
 
@@ -51,6 +51,8 @@ The one-page home on `main` is the visual language. This branch explores a multi
 - Back in scope, and it keeps playing across pages.
 - Full tracks, all three releases (Neuromancer included), stream only with no downloads.
 - A release plays through its tracks in order, and the player remembers its place after a reload.
+
+- Audio page: Releases and Tracks are switchable tabs, not shown at the same time.
 
 ## Player plan (draft)
 
