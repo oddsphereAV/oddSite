@@ -43,7 +43,7 @@ The one-page home on `main` is the visual language. This branch explores a multi
 - Log: occasional posts. About: one page.
 
 **Look**
-- Orange for music (Audio), lime for graphics (Graphics), purple for Log, teal for About. (This flips the current home page, where music is lime and graphics is orange.)
+- Orange for music (Audio), lime for graphics (Graphics), purple for Log, cyan for About. (This flips the current home page, where music is lime and graphics is orange.)
 - Dotted background on the home page only.
 - No background pattern on inner pages: a plain white or black page.
 
