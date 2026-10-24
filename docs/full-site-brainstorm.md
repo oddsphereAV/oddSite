@@ -30,36 +30,40 @@ The one-page home on `main` is the visual language. This branch explores a multi
 - **Graphics grid:** thick-outlined rounded tiles; hover squashes and shows the title tag; filters are pills.
 - **Footer:** the copyright line plus the three social capsules.
 
-## Decisions so far
+## Decisions
 
-1. **Home:** the current one-page design is the draft for the new home page, with refinements.
-   - The Graphics card links to `/graphics` instead of Instagram.
-   - Release cards link to their own release pages.
+**Structure and links**
+- Home: the current one-page design is the draft for the new home page.
+  - The Graphics card links to `/graphics`.
+  - Release cards go straight to their own release page. No Bandcamp and Soundcloud pop-up on the card, on desktop or phone; those links live on the release page.
+  - Instagram: a fourth capsule in the social row, plus a link on the Graphics page.
+  - The Graphics card shows a small strip of thumbnails of the newest pieces.
+- Pages: Home, Audio (release grid, release pages, tracks table), Graphics, Log, About.
+- Search is in the plan: aliases (dnb for drum and bass) and combined tags.
+- Log: occasional posts. About: one page.
 
-2. **Colour:** a colour per section. Lime for music (Audio) and orange for graphics (Graphics). Log and About still need a colour, or stay neutral (black and white).
+**Look**
+- Lime for music (Audio), orange for graphics (Graphics), purple for Log and About.
+- Dotted background on the home page only.
+- No background pattern on inner pages: a plain white or black page.
 
-3. **Background:** the dotted background is for the home page only, as a test. Inner pages get something calmer, to be tried (candidates from the earlier shader round: the stepped terrain, capsules, or a plain page).
+**Audio player**
+- Back in scope, and it keeps playing across pages.
+- Full tracks, all three releases (Neuromancer included), stream only with no downloads.
+- A release plays through its tracks in order, and the player remembers its place after a reload.
 
-4. **Audio player:** back in scope. It plays on the site and keeps playing as you move between pages.
-
-### Player plan (draft)
+## Player plan (draft)
 
 - **Keep playing across pages:** Astro's view transitions with the player marked `transition:persist`, so the audio element is never destroyed on navigation.
 - **Files:** Cloudflare R2, the same way as the graphics (for example `audio.oddsphere.net`), mp3 for streaming.
 - **UI:** a docked capsule at the bottom (play circle, title, rounded progress bar, previous/next), expanding on tap. Media Session API so phone lock screens and headphones can control it.
-- **Where play buttons start it:** the play circle on a release card, a track row, or a release page.
-- **Rights check:** Neuromancer is released by Soundz Organic Collective, so confirm it can be streamed from here before adding it.
+- **Where play buttons start it:** a play circle on a release page or a track row.
+- **Open:** you said Neuromancer can play, so I'm assuming you have the right to stream it from your own site.
 
-## Home page refinements to work out
+## Still to design
 
-- **Instagram:** moves to the social row (as a fourth capsule) and to the Graphics page.
-- **Release card click:** the card goes to `/audio/<release>`. Bandcamp and Soundcloud stay as the two buttons that appear on hover or tap. On phones the tray needs a third, clear way into the release page.
-- **Graphics card:** could show a tiny strip of the newest pieces so it previews what's inside.
-
-## Open questions
-
-1. ~~Is the home page still the front door?~~ Yes, see decisions.
-2. ~~Colour per section or one accent?~~ Per section: lime for music, orange for graphics. What do Log and About get?
-3. ~~Dotwave on every page?~~ Home only, to be tested. What do the inner pages get?
-4. ~~Is the audio player back in scope?~~ Yes. See the plan above.
-5. What belongs on Log and About now, given how much you want to maintain?
+- Navigation (capsule row; "Menu" capsule on phones).
+- The Audio page, release page and tracks table.
+- The Graphics grid and its thumbnail strip on the home page.
+- Search results and the player dock.
+- Where the purple accent sits on Log and About.
