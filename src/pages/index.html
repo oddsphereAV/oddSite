@@ -179,11 +179,11 @@ html.circles .lnk .lb{position:absolute;width:1px;height:1px;overflow:hidden;cli
 @media(max-width:1200px){.links{gap:clamp(1.15rem,3.6vw,1.9rem)}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style><style>
-.row.has-tag{grid-template-rows:auto auto auto;row-gap:.2rem}
-.row.has-tag .tag.grp{grid-row:1;grid-column:2;justify-self:start;color:var(--lime);font-size:clamp(.62rem,.85vw,.8rem);padding:.25em .9em}
-.row.has-tag .pl{grid-row:1/3}
+.row.has-tag{grid-template-rows:auto auto auto;row-gap:0}
+.row.has-tag .tag.grp{grid-row:1;grid-column:2;justify-self:start;color:var(--lime);font-size:clamp(.62rem,.85vw,.8rem);padding:.25em .9em;margin-bottom:.2rem}
+.row.has-tag .pl{grid-row:1/4}
 .row.has-tag .t{grid-row:2}
-.row.has-tag .meta{grid-row:1/3;align-self:center;grid-template-columns:4.6em}
+.row.has-tag .meta{grid-row:1/4;align-self:center;grid-template-columns:4.6em}
 .row.has-tag .acts{grid-row:3}
 .row.has-tag{border-radius:calc(var(--pl)/2 + var(--gap) + 5px + .55rem)}
 .row.has-tag:hover .tag.grp,.row.has-tag:focus-within .tag.grp,.row.has-tag.open .tag.grp{background:var(--lime);color:var(--ink)}
