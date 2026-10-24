@@ -40,6 +40,16 @@ The one-page home on `main` is the visual language. This branch explores a multi
 
 3. **Background:** the dotted background is for the home page only, as a test. Inner pages get something calmer, to be tried (candidates from the earlier shader round: the stepped terrain, capsules, or a plain page).
 
+4. **Audio player:** back in scope. It plays on the site and keeps playing as you move between pages.
+
+### Player plan (draft)
+
+- **Keep playing across pages:** Astro's view transitions with the player marked `transition:persist`, so the audio element is never destroyed on navigation.
+- **Files:** Cloudflare R2, the same way as the graphics (for example `audio.oddsphere.net`), mp3 for streaming.
+- **UI:** a docked capsule at the bottom (play circle, title, rounded progress bar, previous/next), expanding on tap. Media Session API so phone lock screens and headphones can control it.
+- **Where play buttons start it:** the play circle on a release card, a track row, or a release page.
+- **Rights check:** Neuromancer is released by Soundz Organic Collective, so confirm it can be streamed from here before adding it.
+
 ## Home page refinements to work out
 
 - **Instagram:** moves to the social row (as a fourth capsule) and to the Graphics page.
@@ -51,5 +61,5 @@ The one-page home on `main` is the visual language. This branch explores a multi
 1. ~~Is the home page still the front door?~~ Yes, see decisions.
 2. ~~Colour per section or one accent?~~ One accent throughout. Which one?
 3. ~~Dotwave on every page?~~ Home only, to be tested. What do the inner pages get?
-4. Is the audio player back in scope, or does Bandcamp stay the player?
+4. ~~Is the audio player back in scope?~~ Yes. See the plan above.
 5. What belongs on Log and About now, given how much you want to maintain?
