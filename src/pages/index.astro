@@ -231,6 +231,10 @@ html.circles .lnk .lb{position:absolute;width:1px;height:1px;overflow:hidden;cli
 .pl svg,.lnk .ic svg,.arw{overflow:visible}
 .lnk .ic svg>path:only-child{stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round}
 </style>
+<style is:inline>
+/* let the hover lift and squash on the buttons paint outside the growing tray instead of being clipped */
+.row.has-tag.open .acts,.row.has-tag:hover .acts,.row.has-tag:focus-within .acts{overflow:visible}
+</style>
 </head><body>
 <canvas id="bg" aria-hidden="true"></canvas>
 <main class="stage pad">
