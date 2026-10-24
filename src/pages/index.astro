@@ -209,7 +209,7 @@ html.circles .lnk .lb{position:absolute;width:1px;height:1px;overflow:hidden;cli
 </style>
 <style is:inline>
 /* touch screens: tapping a release grows the card and puts big Bandcamp and Soundcloud buttons on their own line below the title, away from the finger */
-@media (hover:none){
+@media (hover:none),(pointer:coarse),(max-width:700px){
   .row.has-tag .acts,.row.has-tag:hover:not(.open) .acts,.row.has-tag:focus-within:not(.open) .acts{grid-row:3;grid-column:1/-1;justify-self:stretch;align-self:auto;justify-content:center;gap:.6rem;max-height:0;overflow:hidden;opacity:0;visibility:hidden;transform:none;margin:0;padding:0;transition:max-height .28s ease,padding .28s ease,opacity .2s ease,visibility 0s .28s}
   .row.has-tag.open .acts{max-height:5rem;padding:.7rem 0 .15rem;opacity:1;visibility:visible;transition:max-height .28s ease,padding .28s ease,opacity .2s ease .08s,visibility 0s}
   .row.has-tag:hover:not(.open) .tag.grp,.row.has-tag:focus-within:not(.open) .tag.grp,.row.has-tag.open .tag.grp{opacity:1;transform:none}
@@ -360,7 +360,7 @@ void main(){
   const q=new URLSearchParams(location.hash.slice(1));document.documentElement.setAttribute('data-cap',['a','b','c'].includes(q.get('cap'))?q.get('cap'):'c');
   if(q.get('links')==='circles')document.documentElement.classList.add('circles');
   if(q.has('longtitles')){const L=['Neuromancer (Soundz Organic Collective Remix) [Extended Club Mix]','Flipside','Globert De Niro Feat. Somebody Else And Another Artist'];document.querySelectorAll('.t').forEach((e,i)=>e.textContent=L[i])}
-  if(matchMedia('(hover: none)').matches){document.querySelectorAll('.row').forEach(r=>r.addEventListener('click',e=>{if(e.target.closest('.act'))return;e.preventDefault();const was=r.classList.contains('open');document.querySelectorAll('.row.open').forEach(x=>x.classList.remove('open'));if(!was){r.classList.add('open');setTimeout(()=>r.scrollIntoView({block:'nearest',behavior:'smooth'}),300)}}));document.addEventListener('click',e=>{if(!e.target.closest('.row'))document.querySelectorAll('.row.open').forEach(x=>x.classList.remove('open'))})}
+  {const tapMode=()=>matchMedia('(hover: none), (pointer: coarse), (max-width: 700px)').matches;document.querySelectorAll('.row').forEach(r=>r.addEventListener('click',e=>{if(!tapMode()||e.target.closest('.act'))return;e.preventDefault();const was=r.classList.contains('open');document.querySelectorAll('.row.open').forEach(x=>x.classList.remove('open'));if(!was){r.classList.add('open');setTimeout(()=>r.scrollIntoView({block:'nearest',behavior:'smooth'}),300)}}));document.addEventListener('click',e=>{if(tapMode()&&!e.target.closest('.row'))document.querySelectorAll('.row.open').forEach(x=>x.classList.remove('open'))})}
   /* background: lightweight WebGL2 Truchet shader, falls back to the static rings */
   const cv=document.getElementById('bg');
   const gl=cv.getContext('webgl2',{antialias:false,alpha:false,powerPreference:'low-power'});
