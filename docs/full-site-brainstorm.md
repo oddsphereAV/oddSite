@@ -36,7 +36,7 @@ The one-page home on `main` is the visual language. This branch explores a multi
    - The Graphics card links to `/graphics` instead of Instagram.
    - Release cards link to their own release pages.
 
-2. **Colour:** one accent throughout the site, not a colour per section. Which accent, and what happens to the orange, is still to decide.
+2. **Colour:** a colour per section. Lime for music (Audio) and orange for graphics (Graphics). Log and About still need a colour, or stay neutral (black and white).
 
 3. **Background:** the dotted background is for the home page only, as a test. Inner pages get something calmer, to be tried (candidates from the earlier shader round: the stepped terrain, capsules, or a plain page).
 
@@ -59,7 +59,7 @@ The one-page home on `main` is the visual language. This branch explores a multi
 ## Open questions
 
 1. ~~Is the home page still the front door?~~ Yes, see decisions.
-2. ~~Colour per section or one accent?~~ One accent throughout. Which one?
+2. ~~Colour per section or one accent?~~ Per section: lime for music, orange for graphics. What do Log and About get?
 3. ~~Dotwave on every page?~~ Home only, to be tested. What do the inner pages get?
 4. ~~Is the audio player back in scope?~~ Yes. See the plan above.
 5. What belongs on Log and About now, given how much you want to maintain?
